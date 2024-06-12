@@ -103,32 +103,33 @@ class RegisterActivity : AppCompatActivity() {
                 tostMessage("비밀번호가 일치하지 않습니다.")
             } else if (!Pattern.matches(phonePattern, phoneNumber)) {
                 tostMessage("전화번호 형식이 옳지 않습니다.")
-            }
-            // 회원 가입 정보 서버로 전송
-            CoroutineScope(Dispatchers.Main).launch {
-                try {
-                    // authorities 매개변수에 빈 리스트를 전달
-                    api.signup(
-                        User(
-                            studentID = studentID,
-                            password = password,
-                            nickname = nickname,
-                            phoneNumber = phoneNumber
+            } else {
+                // 회원 가입 정보 서버로 전송
+                CoroutineScope(Dispatchers.Main).launch {
+                    try {
+                        // authorities 매개변수에 빈 리스트를 전달
+                        api.signup(
+                            User(
+                                studentID = studentID,
+                                password = password,
+                                nickname = nickname,
+                                phoneNumber = phoneNumber
+                            )
                         )
-                    )
-                    tostMessage("가입되었습니다.")
-                    val intent = Intent(
-                        applicationContext,
-                        MainActivity::class.java
-                    )
-                    startActivity(intent)
-                    
-                } catch (e: Exception) {
-                    Log.e(
-                        "RegisterActivity",
-                        "Error occurred during signup: ${e.message}"
-                    )
-                    tostMessage("회원가입에 실패했습니다.")
+                        tostMessage("가입되었습니다.")
+                        val intent = Intent(
+                            applicationContext,
+                            MainActivity::class.java
+                        )
+                        startActivity(intent)
+                        
+                    } catch (e: Exception) {
+                        Log.e(
+                            "RegisterActivity",
+                            "Error occurred during signup: ${e.message}"
+                        )
+                        tostMessage("회원가입에 실패했습니다.")
+                    }
                 }
             }
         }

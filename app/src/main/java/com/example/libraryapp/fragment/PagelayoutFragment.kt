@@ -1,4 +1,4 @@
-
+package com.example.libraryapp.fragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,10 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import com.example.libraryapp.BookinformationFragment
-import com.example.libraryapp.LocationFragment
+import com.example.libraryapp.fragment.book.BookinformationFragment
 import com.example.libraryapp.R
-import com.example.libraryapp.Review2Fragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.squareup.picasso.Picasso
@@ -63,6 +61,6 @@ class PagelayoutFragment : Fragment() {
             fragmentTitleList.add(title)
         }
 
-        fun getPageTitle(position: Int): CharSequence? = fragmentTitleList[position]
+        fun getPageTitle(position: Int): CharSequence = fragmentTitleList[position]
     }
 }

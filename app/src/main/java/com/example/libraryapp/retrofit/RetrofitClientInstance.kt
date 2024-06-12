@@ -1,14 +1,20 @@
 package com.example.libraryapp.retrofit
 
+import android.webkit.CookieManager
 import com.example.libraryapp.retrofit.book.AladinApi
 import com.example.libraryapp.retrofit.book.BookApi
 import com.example.libraryapp.retrofit.review.ReviewAPI
 import com.example.libraryapp.retrofit.user.UserApi
+import okhttp3.OkHttpClient
+import okhttp3.JavaNetCookieJar;
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClientInstance {
     private const val BASE_URL = "http://52.78.146.166:8080/api/"
+    val client = OkHttpClient.Builder()
+        .cookieJar(JavaNetCookieJar(CookieManager()))
+        .build()
 
     private val retrofit by lazy {
         Retrofit.Builder()
@@ -16,6 +22,7 @@ object RetrofitClientInstance {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+    
 
     val userApi: UserApi by lazy {
         retrofit.create(UserApi::class.java)

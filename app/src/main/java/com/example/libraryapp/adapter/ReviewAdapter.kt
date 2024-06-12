@@ -1,4 +1,4 @@
-package com.example.libraryapp
+package com.example.libraryapp.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.libraryapp.retrofit.review.ReviewData
+import com.example.libraryapp.R
+import com.example.libraryapp.retrofit.review.Review
 
-class ReviewAdapter(private val context: Context, private val mList: ArrayList<ReviewData>) : RecyclerView.Adapter<ReviewAdapter.CustomViewHolder>() {
+class ReviewAdapter(private val context: Context, private val mList: ArrayList<Review>) : RecyclerView.Adapter<ReviewAdapter.CustomViewHolder>() {
 
     inner class CustomViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val reviewRate: TextView = view.findViewById(R.id.reviewRate)
@@ -23,12 +24,12 @@ class ReviewAdapter(private val context: Context, private val mList: ArrayList<R
     }
 
     override fun onBindViewHolder(viewholder: CustomViewHolder, position: Int) {
-        val reviewData = mList[position]
+        val reviewResponse = mList[position]
 
-        viewholder.reviewRate.text = reviewData.review_rate
-        viewholder.reviewUserid.text = reviewData.review_userID
-        viewholder.reviewTitle.text = reviewData.review_title
-        viewholder.reviewReview.text = reviewData.review_review
+        viewholder.reviewRate.text = reviewResponse.score
+        viewholder.reviewUserid.text = reviewResponse.isbnNo
+        viewholder.reviewTitle.text = reviewResponse.title
+        viewholder.reviewReview.text = reviewResponse.content
     }
 
     override fun getItemCount(): Int {

@@ -1,4 +1,4 @@
-package com.example.libraryapp
+package com.example.libraryapp.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

@@ -3,8 +3,8 @@ import retrofit2.http.GET
 
 interface AladinApi {
     @GET("bestseller")
-    fun bestseller(): Aladins
+    fun bestseller(): List<Aladin>
 
     @GET("newbook")
-    fun newbook(): Aladins
+    fun newbook(): List<Aladin>
 }

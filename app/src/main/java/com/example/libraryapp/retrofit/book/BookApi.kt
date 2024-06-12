@@ -10,25 +10,25 @@ import retrofit2.http.Path
 
 interface BookApi {
     @GET("books")
-    fun getBooks(): Books
+    fun getBooks(): List<Book>
 
     @GET("books/{isbnNo}")
     fun getBook(@Path(value = "isbnNo") isbnNo: String): Book
 
     @GET("search/{key_word}")
-    fun searchBook(@Path(value = "key_word") keyWord: String): Books
+    fun searchBook(@Path(value = "key_word") keyWord: String): List<Book>
 
     @GET("popularbooks")
-    fun getPopularBooks(): Books
+    fun getPopularBooks(): List<Book>
 
     @GET("recommendbook")
-    fun getRecommendBook(): Books
+    fun getRecommendBook(): List<Book>
 
     @POST("books")
     suspend fun postBooks(@Body book: Book): Book
 
     @POST("keywords")
-    suspend fun postKeywords(@Body keywords: Keyword): Books
+    suspend fun postKeywords(@Body keywords: Keyword): List<Book>
 
     @DELETE("books/{isbnNo}")
     suspend fun deleteBooks(@Path(value = "isbnNo") isbnNo: String): Void

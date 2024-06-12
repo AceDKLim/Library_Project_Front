@@ -1,4 +1,4 @@
-package com.example.libraryapp
+package com.example.libraryapp.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.libraryapp.R
+import com.example.libraryapp.fragment.book.BookinformationFragment
 import com.example.libraryapp.retrofit.book.Book
 
 class BookAdapter(private var books: List<Book>) : RecyclerView.Adapter<BookAdapter.ViewHolder>() {
@@ -20,7 +22,7 @@ class BookAdapter(private var books: List<Book>) : RecyclerView.Adapter<BookAdap
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val bookkk = books[position]
+//        val bookkk = books[position]
 
         // book_image 버튼에 대한 클릭 이벤트 처리
         holder.bookImage.setOnClickListener {

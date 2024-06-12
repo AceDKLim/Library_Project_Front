@@ -67,5 +67,5 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("androidx.navigation:navigation-fragment:2.5.3")
     implementation("androidx.navigation:navigation-ui:2.5.3")
-
+    implementation ("com.squareup.okhttp3:okhttp-urlconnection:4.9.0")
 }

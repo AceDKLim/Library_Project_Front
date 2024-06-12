@@ -1,4 +1,4 @@
-package com.example.libraryapp
+package com.example.libraryapp.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.libraryapp.R
+import com.example.libraryapp.fragment.book.BookinformationFragment
 import com.example.libraryapp.retrofit.book.Aladin
 
 data class AladinAdapter(private var aladins: List<Aladin>) : RecyclerView.Adapter<AladinAdapter.ViewHolder>() {
