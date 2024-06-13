@@ -13,12 +13,11 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.libraryapp.R
-import com.example.libraryapp.ReviewFragment
 import com.example.libraryapp.adapter.ReviewAdapter
 import com.example.libraryapp.retrofit.RetrofitClientInstance
 import com.example.libraryapp.retrofit.review.Review
 
-class Review2Fragment : Fragment() {
+class ReviewsFragment : Fragment() {
 
     // 리뷰 작성에 필요한 정보를 저장하는 전역 변수들
     private lateinit var title: String
@@ -66,7 +65,7 @@ class Review2Fragment : Fragment() {
         btn1.setOnClickListener {
             // 리뷰 작성 페이지로 이동
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.main_container, ReviewFragment())
+            transaction.replace(R.id.main_container, ReviewsFragment())
             transaction.addToBackStack(null)
             transaction.commit()
         }

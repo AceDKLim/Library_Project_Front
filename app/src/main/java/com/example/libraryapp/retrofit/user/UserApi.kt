@@ -1,5 +1,7 @@
 package com.example.libraryapp.retrofit.user
 
+import retrofit2.Call
+
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -20,6 +22,6 @@ interface UserApi {
     suspend fun login(@Body loginData: LoginData): UserResponse
 
     @GET("logout")
-    fun logout(): Void
+    fun logout(): Call<Void>
 }
 

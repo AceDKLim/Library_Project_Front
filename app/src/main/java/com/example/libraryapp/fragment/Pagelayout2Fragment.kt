@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.libraryapp.R
-import com.example.libraryapp.fragment.book.Bookinformation2Fragment
+import com.example.libraryapp.fragment.book.BookInformationFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.squareup.picasso.Picasso
@@ -29,9 +29,9 @@ class Pagelayout2Fragment : Fragment() {
 
         // ViewPager2에 어댑터 설정
         val adapter = PagerAdapter(requireActivity())
-        adapter.addFragment(Bookinformation2Fragment(), "책 정보")
+        adapter.addFragment(BookInformationFragment(), "책 정보")
         adapter.addFragment(Location2Fragment(), "위치")
-        adapter.addFragment(Review2Fragment(), "리뷰")
+        adapter.addFragment(ReviewsFragment(), "리뷰")
 
         // ViewPager2 참조
         val viewPager = view.findViewById<ViewPager2>(R.id.book_viewPager)

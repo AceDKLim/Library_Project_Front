@@ -6,8 +6,9 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.libraryapp.R
-import com.example.libraryapp.fragment.book.BookinformationFragment
+import com.example.libraryapp.fragment.book.BookDetaleFragment
 import com.example.libraryapp.retrofit.book.Book
 
 class BookAdapter(private var books: List<Book>) : RecyclerView.Adapter<BookAdapter.ViewHolder>() {
@@ -22,12 +23,14 @@ class BookAdapter(private var books: List<Book>) : RecyclerView.Adapter<BookAdap
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        val bookkk = books[position]
+        val currentBook = books[position]
+        Glide.with(holder.itemView.context).load(currentBook.imageSrc).into(holder.bookImage)
 
         // book_image 버튼에 대한 클릭 이벤트 처리
         holder.bookImage.setOnClickListener {
             val context = holder.itemView.context
-            val fragment = BookinformationFragment() // BookInformationFragment로 전환
+            val isbnNo=currentBook.isbnNo
+            val fragment = BookDetaleFragment.newInstance(isbnNo) // BookInformationFragment로 전환
             val transaction = (context as AppCompatActivity).supportFragmentManager.beginTransaction()
             transaction.replace(R.id.main_container, fragment)
             transaction.addToBackStack(null)

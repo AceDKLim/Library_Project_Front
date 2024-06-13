@@ -1,6 +1,5 @@
 package com.example.libraryapp
 
-import com.example.libraryapp.fragment.PagelayoutFragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.libraryapp.adapter.ListAdapter
 import com.example.libraryapp.databinding.FragmentSearchBinding
+import com.example.libraryapp.fragment.book.BookDetaleFragment
 
 class SearchFragment : Fragment() {
 
@@ -40,7 +40,7 @@ class SearchFragment : Fragment() {
         listAdapter.setItemClickListener(object : ListAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int) {
                 //책 상세정보 페이지로 이동
-                childFragmentManager.beginTransaction().replace(R.id.main_container, PagelayoutFragment()).commit()
+                childFragmentManager.beginTransaction().replace(R.id.main_container, BookDetaleFragment()).commit()
             }
         })
 

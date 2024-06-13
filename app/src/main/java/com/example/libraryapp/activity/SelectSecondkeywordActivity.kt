@@ -92,6 +92,8 @@ class Register3Activity : AppCompatActivity() {
             try {
                 val keyword= Keyword("s", selectedKeywords.joinToString(",") )
                 Api.postKeywords(keyword)
+                var intent = Intent(this@Register3Activity, HomeActivity::class.java)
+                startActivity(intent)
             } catch (e: Exception) {
                 runOnUiThread {
                     Toast.makeText(this@Register3Activity, "오류 발생: ${e.message}", Toast.LENGTH_SHORT).show()

@@ -1,16 +1,22 @@
 package com.example.libraryapp.adapter
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.libraryapp.R
-import com.example.libraryapp.fragment.book.BookinformationFragment
 import com.example.libraryapp.retrofit.book.Aladin
 
-data class AladinAdapter(private var aladins: List<Aladin>) : RecyclerView.Adapter<AladinAdapter.ViewHolder>() {
+data class AladinAdapter(private var aladins: List<Aladin>, private val context: Context) :
+    RecyclerView.Adapter<AladinAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val bookImage: ImageButton = itemView.findViewById(R.id.book_image)
@@ -22,16 +28,14 @@ data class AladinAdapter(private var aladins: List<Aladin>) : RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val bookkk = aladins[position]
+        val currentBook = aladins[position]
+        Glide.with(holder.itemView.context).load(currentBook.cover).into(holder.bookImage)
 
         // book_image 버튼에 대한 클릭 이벤트 처리
         holder.bookImage.setOnClickListener {
-            val context = holder.itemView.context
-            val fragment = BookinformationFragment() // BookInformationFragment로 전환
-            val transaction = (context as AppCompatActivity).supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.main_container, fragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
+            val url = currentBook.link
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            context.startActivity(intent)
         }
     }
 
