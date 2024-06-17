@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.libraryapp.fragment.book.BooksFragment
+import com.example.libraryapp.fragment.book.ShowBooksFragment
 import com.example.libraryapp.MainActivity
 import com.example.libraryapp.R
 import com.example.libraryapp.SearchFragment
@@ -38,7 +38,7 @@ class HomeActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.fragment_books -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.main_container, BooksFragment()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.main_container, ShowBooksFragment()).commit()
                     true
                 }
                 R.id.fragment_search -> {

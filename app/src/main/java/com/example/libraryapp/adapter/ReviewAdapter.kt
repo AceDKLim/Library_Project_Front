@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.libraryapp.R
-import com.example.libraryapp.retrofit.review.Review
+import com.example.libraryapp.retrofit.review.ReviewResponse
 
-class ReviewAdapter(private val context: Context, private val mList: ArrayList<Review>) : RecyclerView.Adapter<ReviewAdapter.CustomViewHolder>() {
+class ReviewAdapter(reviewList1: Context, private var reviewList: List<ReviewResponse>) : RecyclerView.Adapter<ReviewAdapter.CustomViewHolder>() {
 
     inner class CustomViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val reviewRate: TextView = view.findViewById(R.id.reviewRate)
@@ -24,7 +24,7 @@ class ReviewAdapter(private val context: Context, private val mList: ArrayList<R
     }
 
     override fun onBindViewHolder(viewholder: CustomViewHolder, position: Int) {
-        val reviewResponse = mList[position]
+        val reviewResponse = reviewList[position]
 
         viewholder.reviewRate.text = reviewResponse.score
         viewholder.reviewUserid.text = reviewResponse.isbnNo
@@ -33,6 +33,11 @@ class ReviewAdapter(private val context: Context, private val mList: ArrayList<R
     }
 
     override fun getItemCount(): Int {
-        return mList.size
+        return reviewList.size
+    }
+    
+    fun updateReviews(newReviews: List<ReviewResponse>) {
+        reviewList = newReviews
+        notifyDataSetChanged()
     }
 }

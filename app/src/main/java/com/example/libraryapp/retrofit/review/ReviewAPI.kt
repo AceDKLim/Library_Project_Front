@@ -1,5 +1,6 @@
 package com.example.libraryapp.retrofit.review
 
+import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -9,17 +10,17 @@ import retrofit2.http.Path
 
 interface ReviewAPI {
     @GET("reviews")
-    suspend fun getMyReviews(): ReviewResponses
+    fun getMyReviews(): Call<List<ReviewResponse>>
 
     @GET("reviews/{isbnNo}")
-    suspend fun getBookReviews(@Path(value = "isbnNo") isbnNo : String): ReviewResponses
-
+    fun getBookReviews(@Path(value = "isbnNo") isbnNo : String): Call<List<ReviewResponse>>
+    
     @POST("reviews")
-    suspend fun postReviews(@Body review: Review): ReviewResponse
+    fun postReview(@Body review: Review): Call<ReviewResponse>
 
     @DELETE("reviews/{isbnNo}")
-    suspend fun deleteReview(@Path(value = "isbnNo") isbnNo : String): Void
+    fun deleteReview(@Path(value = "isbnNo") isbnNo : String): Call<Void>
 
     @PUT("reviews/{id}")
-    suspend fun modifyReviews(@Path(value = "id") id : Int, @Body modiReview: ModiReview): ReviewResponse
+    fun modifyReviews(@Path(value = "id") id : Int, @Body modiReview: ModiReview): Call<ReviewResponse>
 }

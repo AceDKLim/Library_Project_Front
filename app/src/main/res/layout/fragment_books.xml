@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragment.book.BooksFragment">
+    tools:context=".fragment.book.ShowBooksFragment">
 
     <Spinner
         android:id="@+id/spinnerFilter"
@@ -24,6 +24,6 @@
         android:layout_height="match_parent"
         android:padding="8dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="3"/>
+        app:spanCount="3" />
 
 </LinearLayout>

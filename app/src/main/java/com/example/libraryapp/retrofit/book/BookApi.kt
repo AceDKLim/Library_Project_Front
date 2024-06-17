@@ -17,7 +17,7 @@ interface BookApi {
     fun getBook(@Path(value = "isbnNo") isbnNo: String): Call<Book>
 
     @GET("search/{key_word}")
-    fun searchBook(@Path(value = "key_word") keyWord: String): List<Book>
+    fun searchBook(@Path(value = "key_word") keyWord: String): Call<List<Book>>
 
     @GET("popularbooks")
     fun getPopularBooks(): Call<List<Book>>

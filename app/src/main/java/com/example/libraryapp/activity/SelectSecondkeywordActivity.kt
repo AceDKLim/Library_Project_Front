@@ -18,7 +18,7 @@ class Register3Activity : AppCompatActivity() {
 
     private lateinit var keywordListView: ListView
     private lateinit var completeButton: ImageButton
-    private val Api = RetrofitClientInstance.bookApi
+    private val bookApi = RetrofitClientInstance.bookApi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,8 +91,8 @@ class Register3Activity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val keyword= Keyword("s", selectedKeywords.joinToString(",") )
-                Api.postKeywords(keyword)
-                var intent = Intent(this@Register3Activity, HomeActivity::class.java)
+                bookApi.postKeywords(keyword)
+                val intent = Intent(this@Register3Activity, HomeActivity::class.java)
                 startActivity(intent)
             } catch (e: Exception) {
                 runOnUiThread {

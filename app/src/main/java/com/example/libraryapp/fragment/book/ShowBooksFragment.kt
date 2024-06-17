@@ -19,10 +19,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class BooksFragment : Fragment() {
+class ShowBooksFragment : Fragment() {
 
     private lateinit var binding: FragmentBooksBinding
-    private lateinit var bookAdapter: BookAdapter
+    private lateinit var recommendAdapter: BookAdapter
+    private lateinit var popularAdapter: BookAdapter
     private lateinit var aladinAdapter: AladinAdapter
 
     private var recommendedBooks: List<Book> = listOf()
@@ -46,9 +47,10 @@ class BooksFragment : Fragment() {
 
     private fun setupRecyclerView() {
         binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
-        bookAdapter = BookAdapter(recommendedBooks)
+        recommendAdapter = BookAdapter(recommendedBooks)
+        popularAdapter= BookAdapter(popularBooks)
         aladinAdapter = AladinAdapter(newBooks, requireContext())
-        binding.recyclerView.adapter = bookAdapter
+        binding.recyclerView.adapter = recommendAdapter
     }
 
     private fun setupSpinner(spinner: Spinner) {
@@ -66,12 +68,12 @@ class BooksFragment : Fragment() {
             ) {
                 when (position) {
                     0 -> {
-                        binding.recyclerView.adapter = bookAdapter
-                        bookAdapter.updateBooks(recommendedBooks)
+                        binding.recyclerView.adapter = recommendAdapter
+                        recommendAdapter.updateBooks(recommendedBooks)
                     } // AI 추천도서
                     1 -> {
-                        binding.recyclerView.adapter = bookAdapter
-                        bookAdapter.updateBooks(popularBooks)
+                        binding.recyclerView.adapter = popularAdapter
+                        popularAdapter.updateBooks(popularBooks)
                     } // 인기도서
                     2 -> {
                         binding.recyclerView.adapter = aladinAdapter
@@ -92,7 +94,7 @@ class BooksFragment : Fragment() {
             override fun onResponse(call: Call<List<Book>>, response: Response<List<Book>>) {
                 if (response.isSuccessful) {
                     recommendedBooks = response.body() ?: listOf()
-                    bookAdapter.updateBooks(recommendedBooks)
+                    recommendAdapter.updateBooks(recommendedBooks)
                 }
             }
 
@@ -106,6 +108,7 @@ class BooksFragment : Fragment() {
             override fun onResponse(call: Call<List<Book>>, response: Response<List<Book>>) {
                 if (response.isSuccessful) {
                     popularBooks = response.body() ?: listOf()
+                    popularAdapter.updateBooks(recommendedBooks)
                 }
             }
 
