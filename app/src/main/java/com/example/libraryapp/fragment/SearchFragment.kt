@@ -1,31 +1,36 @@
-package com.example.libraryapp
+package com.example.libraryapp.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.libraryapp.adapter.ListAdapter
+import com.example.libraryapp.R
+import com.example.libraryapp.adapter.SearchAdapter
 import com.example.libraryapp.databinding.FragmentSearchBinding
 import com.example.libraryapp.fragment.book.BookDetailFragment
 import com.example.libraryapp.retrofit.RetrofitClientInstance
+import com.example.libraryapp.retrofit.book.Book
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SearchFragment : Fragment() {
-    private val bookApi = RetrofitClientInstance.bookApi
-    private var _binding: FragmentSearchBinding? = null
-    private val binding get() = _binding!!
     
-    private val listItems = arrayListOf<ListLayout>()   // 리사이클러 뷰 아이템
-    private val listAdapter = ListAdapter(listItems)    // 리사이클러 뷰 어댑터
-    private var pageNumber = 1      // 검색 페이지 번호
+    private var searchResult: List<Book> = listOf()   // 리사이클러 뷰 아이템
     private var keyword = ""        // 검색 키워드
+    
+    private var _binding: FragmentSearchBinding? = null
+    private val searchAdapter = SearchAdapter(searchResult)    // 리사이클러 뷰 어댑터
+    private val bookApi = RetrofitClientInstance.bookApi
+    
+    private val binding get() = _binding!!
     
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
@@ -36,10 +41,10 @@ class SearchFragment : Fragment() {
         
         // 리사이클러 뷰
         binding.rvList.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvList.adapter = listAdapter
+        binding.rvList.adapter = searchAdapter
         
         // 리스트 아이템 클릭 시 해당 위치로 이동
-        listAdapter.setItemClickListener(object : ListAdapter.OnItemClickListener {
+        searchAdapter.setItemClickListener(object : SearchAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int) {
                 //책 상세정보 페이지로 이동
                 childFragmentManager.beginTransaction()
@@ -50,22 +55,7 @@ class SearchFragment : Fragment() {
         // 검색 버튼
         binding.btnSearch.setOnClickListener {
             keyword = binding.etSearchField.text.toString()
-            pageNumber = 1
-            searchKeyword(keyword, pageNumber)
-        }
-        
-        // 이전 페이지 버튼
-        binding.btnPrevPage.setOnClickListener {
-            pageNumber--
-            binding.tvPageNumber.text = pageNumber.toString()
-            searchKeyword(keyword, pageNumber)
-        }
-        
-        // 다음 페이지 버튼
-        binding.btnNextPage.setOnClickListener {
-            pageNumber++
-            binding.tvPageNumber.text = pageNumber.toString()
-            searchKeyword(keyword, pageNumber)
+            searchKeyword(keyword)
         }
     }
     
@@ -75,17 +65,26 @@ class SearchFragment : Fragment() {
     }
     
     // 키워드 검색 함수
-    private fun searchKeyword(keyword: String, page: Int) {
-        try {
-            bookApi.searchBook(keyword)
-        }catch (e:Exception){
-        }
+    private fun searchKeyword(keyword: String) {
+        
+        bookApi.searchBook(keyword).enqueue(object : Callback<List<Book>> {
+            override fun onResponse(call: Call<List<Book>>, response: Response<List<Book>>) {
+                if (response.isSuccessful) {
+                    searchResult = response.body() ?: listOf()
+                    searchAdapter.updateBooks(searchResult)
+                }
+            }
+            
+            override fun onFailure(call: Call<List<Book>>, t: Throwable) {
+                // 오류 처리
+            }
+        })
         
     }
 }
 
 //검색 결과 처리 함수
-//    private fun addItemsAndMarkers(searchResult: ResultSearchKeyword?) {
+//    private fun addItemsAndMarkers(searchResult: List<Book>) {
 //        if (!searchResult?.documents.isNullOrEmpty()) {
 //            listItems.clear()
 //            binding.mapView.removeAllPOIItems()

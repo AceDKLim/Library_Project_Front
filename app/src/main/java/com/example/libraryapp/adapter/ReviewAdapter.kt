@@ -27,7 +27,7 @@ class ReviewAdapter(reviewList1: Context, private var reviewList: List<ReviewRes
         val reviewResponse = reviewList[position]
 
         viewholder.reviewRate.text = reviewResponse.score
-        viewholder.reviewUserid.text = reviewResponse.isbnNo
+        viewholder.reviewUserid.text = reviewResponse.studentNumber
         viewholder.reviewTitle.text = reviewResponse.title
         viewholder.reviewReview.text = reviewResponse.content
     }
