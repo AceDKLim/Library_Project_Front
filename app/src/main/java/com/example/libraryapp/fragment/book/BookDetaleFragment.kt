@@ -49,7 +49,6 @@ class BookDetailFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.page_layout, container, false)
         
-        val imageView = view.findViewById<ImageView>(R.id.img)
         loadBookDetails()
         
         adapter = PagerAdapter(this)

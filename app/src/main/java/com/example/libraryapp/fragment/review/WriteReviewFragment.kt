@@ -72,7 +72,7 @@ class WriteReviewFragment : Fragment() {
             transaction.commit()
         }
         
-        reviewRating.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
+        reviewRating.setOnRatingBarChangeListener { _, rating, _ ->
             rate = rating
         }
         
@@ -101,7 +101,7 @@ class WriteReviewFragment : Fragment() {
                         if (response.isSuccessful) {
                             dialog =
                                 builder.setMessage("리뷰작성이 완료되었습니다.")
-                                    .setNegativeButton("확인") { dialog, which ->
+                                    .setNegativeButton("확인") { _, _ ->
                                         // Review2Fragment로 이동
                                         val transaction =
                                             requireActivity().supportFragmentManager.beginTransaction()

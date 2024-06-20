@@ -69,7 +69,6 @@ class ShowReviewsFragment : Fragment() {
         
         // 리뷰 데이터 가져오기
         fetchReview()
-        
         // 리뷰 작성 버튼 클릭 리스너 설정
         val btnWriteReview: Button = view.findViewById(R.id.reviewwirteButton)
         btnWriteReview.setOnClickListener {
@@ -107,4 +106,5 @@ class ShowReviewsFragment : Fragment() {
             }
         })
     }
+    
 }

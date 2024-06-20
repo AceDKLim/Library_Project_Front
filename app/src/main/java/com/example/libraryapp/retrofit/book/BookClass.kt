@@ -14,9 +14,6 @@ data class Book(
     @SerializedName("detailSrc") var detailSrc: String,
     @SerializedName("tags") var tags: String
 )
-
-data class Books(val book: List<Book>)
-
 data class ModifyBook(
     @SerializedName("title") var title: String,
     @SerializedName("author") var author: String,
@@ -37,4 +34,14 @@ data class Keyword(
 data class KeywordResponse(
     @SerializedName("studentID") var studentID: String,
     @SerializedName("tags") var tags: String
+)
+
+data class Favorite(
+    @SerializedName("isbnNo") var isbnNo: String
+)
+
+data class FavoriteResponse(
+    @SerializedName("id") var id: Int,
+    @SerializedName("studentID") var studentID: String,
+    @SerializedName("isbnNo") var isbnNo: String
 )

@@ -13,7 +13,7 @@ data class ReviewResponse(
     @SerializedName("title") var title: String,
     @SerializedName("content") var content: String,
     @SerializedName("isbnNo") var isbnNo: String,
-    @SerializedName("studentNumber") var studentNumber: String,
+    @SerializedName("studentnumber") var studentNumber: String,
     @SerializedName("score") var score: String
 )
 data class ModiReview(
@@ -21,6 +21,6 @@ data class ModiReview(
     @SerializedName("title") var title: String,
     @SerializedName("content") var content: String,
     @SerializedName("isbnNo") var isbnNo: String,
-    @SerializedName("studentNumber") var studentNumber: String,
+    @SerializedName("studentnumber") var studentNumber: String,
     @SerializedName("score") var score: String
 )

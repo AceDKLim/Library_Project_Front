@@ -7,5 +7,3 @@ data class Aladin(
     @SerializedName("link") var link: String,
     @SerializedName("title") var title: String,
 )
-
-data class Aladins(val aladins: List<Aladin>)

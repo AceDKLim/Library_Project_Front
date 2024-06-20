@@ -1,12 +1,10 @@
 package com.example.libraryapp.retrofit.user
 
 import retrofit2.Call
-
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
-import java.lang.Void
 
 interface UserApi {
     @GET("check/id/{studentNumber}")
@@ -23,5 +21,8 @@ interface UserApi {
 
     @GET("logout")
     fun logout(): Call<Void>
+    
+    @GET("user")
+    fun getUserInfo(): UserResponse
 }
 

@@ -10,7 +10,7 @@
         android:title="검색"
         android:icon="@drawable/ic_search"/>
     <item
-        android:id="@+id/fragment_logout"
-        android:title="로그아웃"
-        android:icon="@drawable/ic_logout"/>
+        android:id="@+id/fragment_mypage"
+        android:title="마이페이지"
+        android:icon="@drawable/ic_mypage"/>
 </menu>
